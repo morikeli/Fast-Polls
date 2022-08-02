@@ -1,0 +1,49 @@
+{% extends 'polls/base.html' %}{% block title %}Set polls{% endblock %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card p-3">
+                    <h6>Instructions</h6><hr class="dropdown-divider">
+                    <p class="form-text text-muted text-center">
+                        Hello, <b>{{user.username|title}}</b>. Use the "Post Questions" form to set questions and "Add multiple choices" form to add multiple choice on a given question.
+                        In the "Add multiple choices" form click the dropdown menu to select question you posted the type choice in the "Enter choice ..." input field.
+                        One question can have multiple choices. To include multiple choices, select  a question, enter a choice click "Add choice" button. Repeat this process upto maximum no. of choices.
+                        <hr class="mt-n1 mb-1"><b>NB: Only you can edit and delete question and choices you posted</b>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 offset-sm-1">
+                <div class="card p-3">
+                    {% include 'messages.html' %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h5>Post questions</h5>
+                        {{quiz_form|crispy}}
+                        <small class="form-text text-muted text-center"><b>NB: To edit a question, login and go to your homepage, click edit button to edit the question. You can only edit questions you posted.</b></small>
+                        <hr class="dropdown-divider mb-2"><button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="card mt-2 p-3">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h5>Add multiple choices</h5>
+                        {{choice_form|crispy}}
+                        <hr class="dropdown-divider mb-2"><button type="submit" class="btn btn-primary">Add choice</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

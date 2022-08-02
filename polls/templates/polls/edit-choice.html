@@ -1,0 +1,30 @@
+{% extends 'polls/base.html' %}{% block title %}Edit Choices{% endblock %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-sm-3">
+                <div class="card p-3">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h5>Edit Choice Form</h5>
+                        <hr>
+                        <p class="form-text text-muted mt-n3">You are editing choice "<b>{{obj.option}}</b>"</p>
+                        {% include 'messages.html' %}{{choice_form|crispy}}
+                        <hr class="dropdown-divider mb-2"><button type="submit" class="btn btn-primary">Edit multiple choice</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

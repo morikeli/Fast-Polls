@@ -1,0 +1,25 @@
+{% extends 'polls/base.html' %}{% block title %}Logout{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-sm-2">
+                <div class="card p-3">
+                    <h1 class="text-center">Goodbye...</h1>
+                    <h3 class="text-center">You are logged out.</h3>
+                    <a class="text-center" href="{% url 'login' %}">Login again</a>
+                    <a class="text-center" href="{% url 'homepage' %}">View recent polls</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,35 @@
+* {box-sizing: border-box;}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+.navbar-brand {
+    font-weight: 600;
+    margin-left: 3%;
+    font-size: 25px;
+}
+.navbar-nav .nav-item .nav-link, .navbar-nav .nav-item h6, .navbar-nav .nav-item a {
+    color: #fff;
+} 
+.container {
+    margin-top: 6.5%;
+    margin-bottom: 5%;
+}
+.container .card #quiz-title {
+    color: #fff;
+}
+.list-group .list-group-item span {
+    color: #fff;
+    float: right;
+}
+.card #user-links {
+    margin-left: 15%
+}
+#footer {
+    background-color: rgb(80, 76, 76);
+    padding: 5px;
+}
+#footer footer {
+    text-align: center;
+    color: #fff;
+}

@@ -1,0 +1,40 @@
+{% extends 'polls/base.html' %}{% block title %}Homepage{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 offset-sm-2">
+                <div class="card">
+                    <h4 id="quiz-title" class="bg-dark p-2 mb-0">Questions</h4>
+                    <ul class="list-group">
+                        {% for quiz in questions %}
+                        <li class="list-group-item text-center p-2">
+                            {% if quiz.question_text %}<a href="{% url 'vote' quiz.id %}">{{quiz.question_text}}</a>{% if user.userprofile == quiz.set_by %}<a href="{% url 'edit_question' quiz.id %}" id="user-links" class="ml-5">Edit</a> <a href="{% url 'delete' quiz.id %}" id="user-links" class="ml-3">Delete</a>{% endif %}{% endif %}
+                        </li>
+                        {% empty %}
+                        <li class="list-group-item"><h6 class="text-center form-text text-muted">No questions available</h6></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-2">
+                    <h4 class="text-center">NOTE</h4>
+                    <p class="form-text text-muted text-center">
+                        If you want to set questions, click login link on the navigation bar. Once you are are logged in, click the <b>"Set polls"</b> link on the navigation bar for further details.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block scripts %}{% endblock %}
+</body>
+</html>

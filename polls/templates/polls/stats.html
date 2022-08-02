@@ -1,0 +1,32 @@
+{% extends 'polls/base.html' %}{% block title %}Results & Statistics{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Results</h5>
+                {% include 'messages.html' %}
+                <ul class="list-group">
+                    {% for result in results %}
+                    <li class="list-group-item">{{result.option}} <span class="badge bg-primary p-2">{{result.total_votes}}</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h4>Chart</h4>
+                <div class="card p-2">
+                    <img src="data:image/png;base64, {{chart|safe}}">
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

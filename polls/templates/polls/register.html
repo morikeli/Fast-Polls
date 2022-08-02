@@ -1,0 +1,28 @@
+{% extends 'polls/base.html' %}{% block title %}Create Account{% endblock %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-sm-3">
+                <form action="" method="post" class="card p-3">
+                    {% csrf_token %}
+                    <h5 class="text-center">Create account</h5><hr class="dropdown-divider mt-0">
+                    {{signup_form|crispy}}
+                    <button type="submit" class="btn btn-success">Create account</button>
+                    <hr class="dropdown-divider">
+                    <h6 class="text-center">Have an account? Click here to <a href="{% url 'login' %}">login</a></h6>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
