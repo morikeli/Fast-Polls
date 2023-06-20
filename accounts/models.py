@@ -7,7 +7,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     gender = models.CharField(max_length=7, blank=False)
     phone_no = models.CharField(max_length=14, blank=False)
-    profile_pic = models.ImageField(upload_to='User-dps/', default='default.jpg')
+    profile_pic = models.ImageField(upload_to='User-dps/', default='default.png')
     updated = models.DateTimeField(auto_now=True)
 
     REQUIRED_FIELDS = ['username']
