@@ -22,6 +22,7 @@ class SignupView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
+            messages.success(request, 'Account successfully created!')
             return redirect('profile')
         
         context = {'SignupForm': form}
@@ -40,6 +41,7 @@ class UserProfileView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
+            messages.info(request, 'Profile updated & successfully saved')
             return redirect('profile')
         
         context = {'EditProfileForm': form}

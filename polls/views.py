@@ -19,6 +19,7 @@ class CreatePollsView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
+            messages.success(request, 'Poll successfully created!')
             return redirect('create-polls')
         
         context = {'CreateNewPollForm': form}
@@ -40,6 +41,7 @@ class EditPollsView(View):
         poll_obj = Questions.objects.get(id=pk)
         form = self.form_class(request.POST, instance=poll_obj)
         if form.is_valid():
+            messages.warning(request, 'Poll successfully updated')
             return redirect('edit-polls', pk)
         
         context = {'EditPollsForm': form}
@@ -59,6 +61,7 @@ class CreateNewChoicesView(View):
     def post(self, request, pk, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
+            messages.success(request, 'Choice successfully created!')
             return redirect('create-choices')
         
         context = {'CreateNewChoicesForm': form}
@@ -80,6 +83,7 @@ class EditChoicesView(View):
         poll_obj = Choices.objects.get(id=pk)
         form = self.form_class(request.POST, instance=poll_obj)
         if form.is_valid():
+            messages.warning(request, 'Choice successfully updated!')
             return redirect('edit-choices', pk)
         
         context = {'EditChoicesForm': form}
@@ -98,6 +102,7 @@ class VotingView(View):
     def post(self, request, pk, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
+            messages.success(request, 'Form successfully submitted!')
             return redirect('vote', pk)
         
         context = {'VotingForm': form}
