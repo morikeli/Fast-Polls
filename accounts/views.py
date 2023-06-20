@@ -14,7 +14,7 @@ class SignupView(View):
     template_name = 'accounts/signup.html'
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
+        form = self.form_class()
 
         context = {'SignupForm': form}
         return render(request, self.template_name, context)
@@ -32,7 +32,7 @@ class UserProfileView(View):
     template_name = 'accounts/profile.html'
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
+        form = self.form_class()
 
         context = {'EditProfileForm': form}
         return render(request, self.template_name, context)
