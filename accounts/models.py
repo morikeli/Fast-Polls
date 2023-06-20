@@ -17,7 +17,7 @@ class User(AbstractUser):
         return f'{self.username}'
     
     def save(self, *args, **kwargs):
-        super(self, User).save(*args, **kwargs)
+        super(User, self).save(*args, **kwargs)
 
         img = Image.open(self.profile_pic.path)
 
