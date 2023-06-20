@@ -59,6 +59,18 @@ class CreateMultipleChoicesForm(forms.ModelForm):
         model = Choices
         fields = '__all__'
 
+
+class EditMultipleChoicesForm(forms.ModelForm):
+    choice = forms.CharField(
+        widget=forms.TextInput(attrs={'type': 'text', 'class': 'mb-2'}),
+        label='Poll/Question',
+    )
+
+    class Meta:
+        model = Choices
+        fields = '__all__'
+
+
 class VotingForm(forms.ModelForm):
     choice = forms.BooleanField(
         widget=forms.RadioSelect(attrs={'type': 'radio', 'class': 'mb-2'}),
