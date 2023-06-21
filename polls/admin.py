@@ -4,7 +4,7 @@ from django.contrib import admin
 @admin.register(Questions)
 class PollsTable(admin.ModelAdmin):
     list_display = ['author', 'category', 'close_voting']
-    readonly_fields = ['author', 'category', 'close_voting']
+    readonly_fields = ['quiz', 'category', 'close_voting']
 
 @admin.register(Choices)
 class ChoicesTable(admin.ModelAdmin):
