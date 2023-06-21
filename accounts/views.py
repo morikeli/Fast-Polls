@@ -37,13 +37,13 @@ class UserProfileView(View):
     template_name = 'accounts/profile.html'
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class()
+        form = self.form_class(instance=request.user)
 
         context = {'EditProfileForm': form}
         return render(request, self.template_name, context)
     
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             messages.info(request, 'Profile updated & successfully saved')
