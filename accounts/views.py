@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.utils.decorators import method_decorator
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -23,12 +24,14 @@ class SignupView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
+            form.save()
             messages.success(request, 'Account successfully created!')
             return redirect('profile')
         
         context = {'SignupForm': form}
         return render(request, self.template_name, context)
 
+@method_decorator(decorator=login_required, name='get')
 class UserProfileView(View):
     form_class = EditProfileForm
     template_name = 'accounts/profile.html'
@@ -42,6 +45,7 @@ class UserProfileView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
+            form.save()
             messages.info(request, 'Profile updated & successfully saved')
             return redirect('profile')
         
