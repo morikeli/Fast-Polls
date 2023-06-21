@@ -14,8 +14,8 @@ class LoginForm(AuthenticationForm):
         super().__init__(request, *args, **kwargs)
 
         self.error_messages['invalid_login'] = 'INVALID CREDENTIALS!!! \
-        Enter correct name (first name and last name -> separate first name and last name with a space!) and password. \
-        Name and password maybe case-senstitive.'
+        Enter correct email address and password you used to signup. \
+        Email and password maybe case-senstitive.'
 
 
 
@@ -53,10 +53,7 @@ class EditProfileForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'type': 'tel', 'class': 'mb-2', 'minlength': 10, 'maxlength': 10, 'placeholder': 'Enter your mobile number'}),
         help_text='Enter your mobile number without your country code'
     )
-    profile_pic = forms.ImageField(
-        widget=forms.FileInput(attrs={'type': 'file', 'accept': '.jpg, .jpeg, .png'}),
-    )
-
+    
     class Meta:
         model = User
         fields = [
