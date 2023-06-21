@@ -54,4 +54,4 @@ class UserProfileView(View):
 
 
 class LogoutUser(LogoutView):
-    template_name = 'accounts/logout.html'
+    template_name = 'polls/homepage.html'
