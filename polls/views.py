@@ -6,6 +6,13 @@ from .models import Questions, Choices
 from .forms import CreatePollsForm, CreateMultipleChoicesForm, VotingForm, EditPollsForm, EditMultipleChoicesForm
 
 
+class HomepageView(View):
+    template_name = 'polls/homepage.html'
+
+    def get(self, request, *args, **kwargs):
+        context = {}
+        return render(request, self.template_name, context)
+
 class CreatePollsView(View):
     form_class = CreatePollsForm
     template_name = 'polls/create-polls.html'
