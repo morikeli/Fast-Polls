@@ -1,0 +1,31 @@
+    {% extends 'base.html' %}
+    {% load static %}
+    {% load crispy_forms_tags %}
+    {% block title %} Login {% endblock %}
+    {% block content %}
+    <main>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <form action="" method="post" class="card card-body p-4">
+                        {% csrf_token %}
+                        <div class="row">
+                            <h3 class="card-title text-center">Welcome Back</h3>
+                            <div class="col-md-12">
+                                {% include 'messages.html' %}
+                                {{ form }}
+                                <h6 class="small text-end"><a href="">Forgot password?</a></h6>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-outline-success mt-3" style="color: #18d26e;">Login</button>
+                                    <hr>
+                                    <h6 class="small text-center">Don't have an account? <a href="{% url 'signup' %}">Signup</a></h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    {% endblock %}
