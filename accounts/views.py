@@ -3,10 +3,11 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
-from .forms import SignupForm, EditProfileForm
+from .forms import LoginForm, SignupForm, EditProfileForm
 
 
 class UserLoginView(LoginView):
+    authentication_form = LoginForm
     template_name = 'accounts/login.html'
 
 class SignupView(View):

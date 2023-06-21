@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 from .models import User
 
@@ -8,6 +8,17 @@ SELECT_GENDER = (
     ('Male', 'Male'),
     ('Female', 'Female'),
 )
+
+class LoginForm(AuthenticationForm):
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(request, *args, **kwargs)
+
+        self.fields['username'].label = 'Name'
+        self.error_messages['invalid_login'] = 'INVALID CREDENTIALS!!! \
+        Enter correct name (first name and last name -> separate first name and last name with a space!) and password. \
+        Name and password maybe case-senstitive.'
+
+
 
 class SignupForm(UserCreationForm):
     """ This form is used by users to create an account. """
