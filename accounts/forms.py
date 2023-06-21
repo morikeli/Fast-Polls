@@ -50,8 +50,8 @@ class SignupForm(UserCreationForm):
 class EditProfileForm(forms.ModelForm):
     """ This form allow users to edit their profile. """
     phone_no = forms.CharField(
-        widget=forms.TextInput(attrs={'type': 'number', 'class': 'mb-2', 'minlength': 10, 'maxlength': 10, 'placeholder': 'Enter your mobile number'}),
-        help_text='Enter your number without your country code'
+        widget=forms.TextInput(attrs={'type': 'tel', 'class': 'mb-2', 'minlength': 10, 'maxlength': 10, 'placeholder': 'Enter your mobile number'}),
+        help_text='Enter your mobile number without your country code'
     )
     profile_pic = forms.ImageField(
         widget=forms.FileInput(attrs={'type': 'file', 'accept': '.jpg, .jpeg, .png'}),
