@@ -43,6 +43,7 @@ class EditPollsForm(forms.ModelForm):
     )
     close_voting = forms.BooleanField(
         widget=forms.CheckboxInput(attrs={'type': 'checkbox'}),
+        required=False,
         help_text='Select this if you wish to close this poll.'
     )
 
