@@ -53,7 +53,10 @@ class EditProfileForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'type': 'tel', 'class': 'mb-2', 'minlength': 10, 'maxlength': 10, 'placeholder': 'Enter your mobile number'}),
         help_text='Enter your mobile number without your country code'
     )
-    
+    profile_pic = forms.FileField(
+        widget=forms.FileInput(attrs={'type': 'file', 'accept': '.jpg, .jpeg, .png'}),
+    )
+
     class Meta:
         model = User
         fields = [
