@@ -129,3 +129,5 @@ AUTH_USER_MODEL = 'accounts.user'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+LOGIN_REDIRECT_URL = 'homepage'
