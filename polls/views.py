@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
@@ -10,9 +11,21 @@ class HomepageView(View):
     template_name = 'polls/homepage.html'
 
     def get(self, request, *args, **kwargs):
-        context = {}
+        all_polls = []
+        if request.user.is_authenticated:
+            all_polls = Questions.objects.all()
+            public_polls = []
+        else:
+            public_polls = Questions.objects.filter(category='Public').all()
+
+        created_polls = list(public_polls) + list(all_polls)
+
+        context = {
+            'polls': created_polls, 
+        }
         return render(request, self.template_name, context)
 
+@method_decorator(login_required, name='get')
 class CreatePollsView(View):
     form_class = CreatePollsForm
     template_name = 'polls/create-polls.html'
