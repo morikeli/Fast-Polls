@@ -13,7 +13,7 @@
                             <h3 class="card-title text-center">Welcome Back</h3>
                             <div class="col-md-12">
                                 {% include 'messages.html' %}
-                                {{ form }}
+                                {{ form|crispy }}
                                 <h6 class="small text-end"><a href="">Forgot password?</a></h6>
                                 <div class="d-grid gap-2">
                                     <button type="submit" class="btn btn-outline-success mt-3" style="color: #18d26e;">Login</button>

@@ -13,9 +13,9 @@
                             <h3 class="card-title text-center">Create account</h3>
                             <div class="col-md-12">
                                 {% include 'messages.html' %}
-                                {{ SignupForm }}
+                                {{ SignupForm|crispy }}
                                 <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-outline-success mt-3">Signup</button>
+                                    <button type="submit" class="btn btn-outline-success mt-3 signup">Signup</button>
                                     <hr>
                                     <h6 class="small text-center">Already have an account? <a href="{% url 'login' %}">Login</a></h6>
                                 </div>
