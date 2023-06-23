@@ -16,15 +16,10 @@ class CreatePollsForm(forms.ModelForm):
         choices=SELECT_CATEGORY,
         help_text='Indicate whether this is a public or private poll.'
     )
-    close_voting = forms.BooleanField(
-        widget=forms.CheckboxInput(attrs={'type': 'checkbox'}),
-        required=False,
-        help_text='Select this if you wish to close this poll.'
-    )
 
     class Meta:
         model = Questions
-        fields = '__all__'
+        fields = ['quiz', 'category']
 
 class EditPollsForm(forms.ModelForm):
     SELECT_CATEGORY = (
@@ -37,12 +32,12 @@ class EditPollsForm(forms.ModelForm):
         label='Poll/Question',
     )
     category = forms.ChoiceField(
-        widget=forms.Select(attrs={'type': 'select', 'class': 'mb-2'}),
+        widget=forms.Select(attrs={'type': 'select'}),
         choices=SELECT_CATEGORY,
         help_text='Indicate whether this is a public or private poll.'
     )
     close_voting = forms.BooleanField(
-        widget=forms.CheckboxInput(attrs={'type': 'checkbox'}),
+        widget=forms.CheckboxInput(attrs={'type': 'checkbox', 'class': 'form-check-input'}),
         required=False,
         help_text='Select this if you wish to close this poll.'
     )
