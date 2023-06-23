@@ -1,0 +1,45 @@
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <title>Fast Polls | {% block title %}{% endblock %}</title>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'homepage' %}"><i class="bi-check-circle-fill"></i> <span id="fast">Fast</span> Polls</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse nav justify-content-center" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center">
+                    <li class="nav-item">
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    <a class="nav-link text-success" href="{% url 'create-polls' %}">Create poll <i class="bi-plus-circle-fill"></i></a>    
+                </span>
+                {% if user.is_authenticated %}
+                <span class="navbar-text">
+                    <a href="{% url 'profile' %}" class="nav-link text-primary">{{ request.user.username }}</a>
+                </span>
+                <span class="navbar-text">
+                    <a href="{% url 'logout_user' %}" class="btn btn-primary btn-sm">Logout</a>
+                </span>
+                {% else %}
+                <span class="navbar-text">
+                    <a href="{% url 'login' %}" class="nav-link text-primary">Login</a>
+                </span>
+                <span class="navbar-text">
+                    <a href="{% url 'signup' %}" class="btn btn-primary btn-sm">Signup</a>
+                </span>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    
+    {% block content %}
+    {% endblock %}
