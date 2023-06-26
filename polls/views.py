@@ -32,8 +32,9 @@ class CreatePollsView(View):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
+        polls = Questions.objects.filter(author=request.user).all()
 
-        context = {'CreateNewPollForm': form}
+        context = {'CreateNewPollForm': form, 'polls': polls}
         return render(request, self.template_name, context)
     
     def post(self, request, *args, **kwargs):
@@ -56,8 +57,10 @@ class EditPollsView(View):
     def get(self, request, pk, *args, **kwargs):
         poll_obj = Questions.objects.get(id=pk)
         form = self.form_class(instance=poll_obj)
+        choices = Choices.objects.filter(question__author=request.user).all()
 
-        context = {'EditPollsForm': form}
+
+        context = {'EditPollsForm': form, 'choices': choices}
         return render(request, self.template_name, context)
     
     def post(self, request, pk, *args, **kwargs):
@@ -80,7 +83,7 @@ class CreateNewChoicesView(View):
         quiz_obj = Questions.objects.get(id=pk)
         form = self.form_class()
 
-        context = {'CreateNewChoicesForm': form}
+        context = {'CreateNewChoicesForm': form, 'poll': quiz_obj}
         return render(request, self.template_name, context)
     
     def post(self, request, pk, *args, **kwargs):
@@ -105,15 +108,17 @@ class EditChoicesView(View):
     def get(self, request, pk, *args, **kwargs):
         poll_obj = Choices.objects.get(id=pk)
         form = self.form_class(instance=poll_obj)
+        choices = Choices.objects.filter(question__author=request.user).all()
 
-        context = {'EditChoicesForm': form}
+
+        context = {'EditChoicesForm': form, 'choices': choices}
         return render(request, self.template_name, context)
     
     def post(self, request, pk, *args, **kwargs):
         poll_obj = Choices.objects.get(id=pk)
         form = self.form_class(request.POST, instance=poll_obj)
         if form.is_valid():
-            form.save(commit=False)
+            form.save()
             messages.warning(request, 'Choice successfully updated!')
             return redirect('edit-choices', pk)
         
