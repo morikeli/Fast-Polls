@@ -67,12 +67,3 @@ class EditMultipleChoicesForm(forms.ModelForm):
         model = Choices
         fields = '__all__'
 
-
-class VotingForm(forms.ModelForm):
-    choice = forms.BooleanField(
-        widget=forms.RadioSelect(attrs={'type': 'radio', 'class': 'mb-2'}),
-    )
-
-    class Meta:
-        model = Choices
-        fields = ['choice']
