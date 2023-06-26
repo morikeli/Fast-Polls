@@ -3,8 +3,8 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
-from .models import Questions, Choices
-from .forms import CreatePollsForm, CreateMultipleChoicesForm, VotingForm, EditPollsForm, EditMultipleChoicesForm
+from .models import Questions, Choices, VotersDetails
+from .forms import CreatePollsForm, CreateMultipleChoicesForm, EditPollsForm, EditMultipleChoicesForm
 
 
 class HomepageView(View):
@@ -24,6 +24,12 @@ class HomepageView(View):
             'polls': created_polls, 
         }
         return render(request, self.template_name, context)
+    
+    def post(self, request, *args, **kwargs):
+        delete_obj = request.POST['delete-request']
+        poll_obj = Questions.objects.get(id=delete_obj).delete()
+        return redirect('homepage')
+
 
 @method_decorator(login_required, name='get')
 class CreatePollsView(View):
@@ -49,7 +55,8 @@ class CreatePollsView(View):
         
         context = {'CreateNewPollForm': form}
         return render(request, self.template_name, context)
-    
+
+@method_decorator(login_required, name='get')
 class EditPollsView(View):
     form_class = EditPollsForm
     template_name = 'polls/edit-polls.html'
@@ -74,7 +81,7 @@ class EditPollsView(View):
         context = {'EditPollsForm': form}
         return render(self, self.template_name, context)
 
-    
+@method_decorator(login_required, name='get')
 class CreateNewChoicesView(View):
     form_class = CreateMultipleChoicesForm
     template_name = 'polls/create-choices.html'
@@ -101,6 +108,7 @@ class CreateNewChoicesView(View):
         context = {'CreateNewChoicesForm': form}
         return render(request, self.template_name, context)
 
+@method_decorator(login_required, name='get')
 class EditChoicesView(View):
     form_class = EditMultipleChoicesForm
     template_name = 'polls/edit-choices.html'
@@ -125,23 +133,35 @@ class EditChoicesView(View):
         context = {'EditChoicesForm': form}
         return render(self, self.template_name, context)
 
+@method_decorator(login_required, name='get')
 class VotingView(View):
-    form_class = VotingForm
     template_name = 'polls/vote.html'
 
     def get(self, request,  pk, *args, **kwargs):
-        form = self.form_class()
-
-        context = {'VotingForm': form}
+        poll_obj = Questions.objects.get(id=pk)
+        choice_obj = Choices.objects.filter(question_id=poll_obj).all()
+        voters_obj = None
+        
+        try:
+            voters_obj = VotersDetails.objects.get(voter=request.user, polls_id__question=poll_obj)
+        except VotersDetails.DoesNotExist:
+            voters_obj = None
+        
+        context = {'poll': poll_obj, 'choices': choice_obj, 'voters_obj': voters_obj}
         return render(request, self.template_name, context)
     
     def post(self, request, pk, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save(commit=False)
-            messages.success(request, 'Form successfully submitted!')
-            return redirect('vote', pk)
+        selected_choice = request.POST['Choice']
+        choice_qs = Choices.objects.get(id=selected_choice)
         
-        context = {'VotingForm': form}
-        return render(request, self.template_name, context)
+        # increment total votes
+        choice_qs.total_votes += 1
+        choice_qs.save()
 
+        # save voters details        
+        save_voter = VotersDetails.objects.create(polls_id=selected_choice, voter=request.user, selected_choice=choice_qs.choice)
+        save_voter.save()
+        messages.success(request, 'Form successfully submitted!')
+        return redirect('vote', pk)
+
+    
