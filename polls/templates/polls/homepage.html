@@ -16,21 +16,21 @@
                     <h3 class="fw-bold">Public polls</h3>
                     <h5 class="text-muted mb-4">Polls created by FastPolls members</h5>
                     {% for poll in polls %}
-                    <div class="card card-body mb-3 p-4">
+                    <div class="card card-body mb-3 p-4 polls-card">
                         <h2 class="card-title question mb-3"><a href="">{{ poll.quiz }}</a></h2>
-                        {% if request.user.is_authenticated and request.user == poll.author %}
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <h6 class="small text-muted fw-bold">{{ poll.created|timesince }} ago</h6>
                             </div>
+                            {% if request.user.is_authenticated and request.user == poll.author %}
                             <a href="{% url 'edit-polls' poll.id %}" class="text-success" id="edit-link">
                                 <i class="bi-pen-fill" style="font-size: 13px;"></i> Edit
                             </a>
                             <a href="{% url 'edit-polls' poll.id %}" class="text-danger" id="delete-link">
                                 <i class="bi-trash-fill" style="font-size: 13px"></i> Delete
                             </a>
+                            {% endif %}
                         </div>
-                        {% endif %}
                     </div>
                     {% endfor %}
                 </div>
