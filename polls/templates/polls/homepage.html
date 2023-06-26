@@ -13,11 +13,34 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-sm-3">
+                    <!-- Modal -->
+                    {% for poll in polls %}
+                    <div class="modal fade" id="delete-{{ poll.id }}" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5"><i class="bi-exclamation-triangle-fill" style="color: #ffc107;"></i> Delete poll</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h5 class="small">Are you sure you want to delete <b>"{{ poll.quiz }}"</b>?</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <a href="{% url 'homepage' %}" class="btn btn-secondary" style="color: #fff;"><i class="bi-x-circle-fill"></i> No, Cancel</a>
+                                        <button type="submit" name="delete-request" value="{{ poll.id }}" class="btn btn-danger" style="color: #fff;"><i class="bi-trash-fill"></i> Yes, Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                     <h3 class="fw-bold">Public polls</h3>
                     <h5 class="text-muted mb-4">Polls created by FastPolls members</h5>
                     {% for poll in polls %}
                     <div class="card card-body mb-3 p-4 polls-card">
-                        <h2 class="card-title question mb-3"><a href="">{{ poll.quiz }}</a></h2>
+                        <h2 class="card-title question mb-3"><a href="{% url 'vote' poll.id %}">{{ poll.quiz }}</a></h2>
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <h6 class="small text-muted fw-bold">{{ poll.created|timesince }} ago</h6>
@@ -26,7 +49,7 @@
                             <a href="{% url 'edit-polls' poll.id %}" class="text-success" id="edit-link">
                                 <i class="bi-pen-fill" style="font-size: 13px;"></i> Edit
                             </a>
-                            <a href="{% url 'edit-polls' poll.id %}" class="text-danger" id="delete-link">
+                            <a href="{% url 'homepage' %}" data-bs-toggle="modal" data-bs-target="#delete-{{ poll.id }}" class="text-danger" id="delete-link">
                                 <i class="bi-trash-fill" style="font-size: 13px"></i> Delete
                             </a>
                             {% endif %}
