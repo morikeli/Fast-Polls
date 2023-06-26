@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Edit polls{% endblock %}
+{% block content %}
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-sm-2">
+                {% include 'messages.html' %}
+                <form action="" method="post" class="card card-body">
+                    {% csrf_token %}
+                    <h3 class="card-title fw-bold mb-0">Update poll</h3>
+                    <hr>
+                    {{ EditChoicesForm|crispy }}
+                    <hr>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-outline-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-body">
+                    <h3 class="card-title fw-bold mb-0">Edit Multiple choices</h3>
+                    <hr>
+                    <p class="small fst-italic">
+                        Click the links displayed below to edit multiple choices to each question.
+                    </p>
+                    <ol class="list-group list-group-numbered">
+                        {% for choice in choices %}
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto small text-muted">
+                                <div class="fw-bold"><a href="{% url 'edit-choices' choice.id %}">{{ choice }} <i class="bi-pencil-fill"></i></a></div>
+                                Posted {{ choice.created|timesince }} ago
+                            </div>
+                            <span class="badge bg-primary rounded-pill"></span>
+                        </li>
+                        {% endfor %}
+                      </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
