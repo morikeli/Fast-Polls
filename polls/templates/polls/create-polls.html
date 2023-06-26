@@ -30,7 +30,7 @@
                             {% for poll in polls %}
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto fw-bold small text-muted">
-                                    <div class="fw-bold"><a href="{% url 'edit-polls' poll.id %}">{{ poll.quiz }}</a></div>
+                                    <div class="fw-bold"><a href="{% url 'create-choices' poll.id %}">{{ poll.quiz }}</a></div>
                                     Posted {{ poll.created|timesince }} ago &centerdot; {{ poll.category }}
                                 </div>
                                 <span class="badge bg-primary rounded-pill"></span>
