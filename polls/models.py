@@ -36,6 +36,7 @@ class Choices(models.Model):
 class VotersDetails(models.Model):
     id = models.CharField(max_length=25, primary_key=True, unique=True, editable=False)
     polls = models.ForeignKey(Choices, on_delete=models.CASCADE, editable=False)
+    voter = models.ForeignKey(User, on_delete=models.CASCADE, editable=False)
     selected_choice = models.CharField(max_length=100, editable=False)
     voted = models.DateTimeField(auto_now_add=True)
 
