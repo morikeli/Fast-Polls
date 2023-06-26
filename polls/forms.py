@@ -49,7 +49,7 @@ class EditPollsForm(forms.ModelForm):
 class CreateMultipleChoicesForm(forms.ModelForm):
     choice = forms.CharField(
         widget=forms.TextInput(attrs={'type': 'text', 'placeholder': 'Create choice for your poll ...', 'class': 'mb-2'}),
-        label='Poll/Question',
+        label='Add Choice',
     )
 
     class Meta:
