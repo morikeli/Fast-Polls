@@ -22,15 +22,15 @@ class LoginForm(AuthenticationForm):
 class SignupForm(UserCreationForm):
     """ This form is used by users to create an account. """
     first_name = forms.CharField(
-        widget=forms.TextInput(attrs={'type': 'text', 'class': 'mb-2', 'autocomplete': True}),
+        widget=forms.TextInput(attrs={'type': 'text', 'class': 'mb-2', 'autofocus': True}),
         required=True,
     )
     last_name = forms.CharField(
-        widget=forms.TextInput(attrs={'type': 'text', 'class': 'mb-2', 'autocomplete': True}),
+        widget=forms.TextInput(attrs={'type': 'text', 'class': 'mb-2'}),
         required=True,
     )
     username = forms.CharField(
-        widget=forms.TextInput(attrs={'type': 'text', 'class': 'mb-2', 'autocomplete': True}),
+        widget=forms.TextInput(attrs={'type': 'text', 'class': 'mb-2'}),
         required=True,
     )
     email = forms.EmailField(
