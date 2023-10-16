@@ -16,7 +16,7 @@ class HomepageView(View):
             all_polls = Questions.objects.all()
             public_polls = []
         else:
-            public_polls = Questions.objects.filter(category='Public').all()
+            public_polls = Questions.objects.all()
 
         created_polls = list(public_polls) + list(all_polls)
 
