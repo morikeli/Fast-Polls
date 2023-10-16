@@ -3,9 +3,7 @@ html, body {
     margin: 0;
     padding: 0;
 }
-/* body {
-    font-family: 'Roboto Mono', monospace;
-} */
+
 a {
     text-decoration: none;
 }
@@ -33,22 +31,12 @@ a {
     background-color: #18d26e;
     color: #fff;
 }
-form .btn {
-    margin-top: 5px;
-    color: #000000;
-}
-.btn {
-    color: #fff;
-}
 main {
     margin-top: 3%;
     margin-bottom: 3%;
 }
 main .container  .card .question a {
     color: #525151;
-}
-#edit-link, #delete-link {
-    margin-right: 7px;
 }
 
 main .container .row .col-md-6 .polls-card {
