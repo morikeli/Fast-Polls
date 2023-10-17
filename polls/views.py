@@ -154,14 +154,18 @@ class VotingView(View):
         selected_choice = request.POST['Choice']
         choice_qs = Choices.objects.get(id=selected_choice)
         
-        # increment total votes
-        choice_qs.total_votes += 1
-        choice_qs.save()
+        # check if the poll is past due date.
+        if choice_qs.question.is_closed is True:
+            messages.warning(request, 'Poll is currently closed! Voting cannot take place.')
+            return redirect('vote', pk)
+        
+        else:
+            # increment total votes
+            choice_qs.total_votes += 1
+            choice_qs.save()
 
-        # save voters details        
-        save_voter = VotersDetails.objects.create(polls_id=selected_choice, voter=request.user, selected_choice=choice_qs.choice)
-        save_voter.save()
-        messages.success(request, 'Form successfully submitted!')
-        return redirect('vote', pk)
-
-    
+            # save voters details        
+            save_voter = VotersDetails.objects.create(polls_id=selected_choice, voter=request.user, selected_choice=choice_qs.choice)
+            save_voter.save()
+            messages.success(request, 'Form successfully submitted!')
+            return redirect('vote', pk)
