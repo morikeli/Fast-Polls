@@ -8,5 +8,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
-    re_path(r'^files/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
+    re_path(r'^media-files/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
