@@ -53,7 +53,7 @@
                                         <a href="{% url 'homepage' %}" data-bs-toggle="modal" data-bs-target="#delete-{{ poll.id }}" class="btn btn-sm btn-outline-danger"><i class="bi-trash-fill"></i> Delete</a>
 
                                         {% else %}
-                                        <a href="{% url 'homepage' %}" class="btn btn-sm btn-secondary">View</a>
+                                        <a href="{% url 'vote' poll.id %}" class="btn btn-sm btn-secondary">View</a>
                                         {% endif %}
                                     </div>
                                 </div>
