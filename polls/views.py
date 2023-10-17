@@ -13,10 +13,10 @@ class HomepageView(View):
     def get(self, request, *args, **kwargs):
         all_polls = []
         if request.user.is_authenticated:
-            all_polls = Questions.objects.all()
+            all_polls = Questions.objects.filter(is_closed=False).all()
             public_polls = []
         else:
-            public_polls = Questions.objects.all()
+            public_polls = Questions.objects.filter(is_closed=False).all()
 
         created_polls = list(public_polls) + list(all_polls)
 
