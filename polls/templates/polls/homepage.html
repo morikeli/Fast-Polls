@@ -10,9 +10,9 @@
 <body>
     {% block content %}
     <main>
-        <div class="container">
+        <div class="containery">
             <div class="row">
-                <div class="col-xl-6 col-sm-6 offset-sm-2">
+                <div class="col-xl-6 col-md-6 offset-sm-3">
                     {% for poll in polls %}
                     <div class="modal fade" id="delete-{{ poll.id }}" tabindex="-1">
                         <div class="modal-dialog">
